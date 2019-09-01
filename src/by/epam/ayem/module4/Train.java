@@ -1,3 +1,4 @@
+package by.epam.ayem.module4;
 /*4. Создайте класс task4train, содержащий поля: название пункта назначения, номер поезда, время отправления.
 Создайте данные в массиве из пяти элементов типа task4train, добавьте возможность сортировки элементов массива
 по номерам поездов. Добавьте возможность вывода информации о поезде, номер которого введен пользователем.
@@ -10,13 +11,13 @@ public class Train {
     private int trainNumber;
     private String departureTime;
 
-    public Train(String destination, int trainNumber, String departureTime) {
+    Train(String destination, int trainNumber, String departureTime) {
         this.destination = destination;
         this.trainNumber = trainNumber;
         this.departureTime = departureTime;
     }
 
-    public String getDestination() {
+    String getDestination() {
         return destination;
     }
 
@@ -24,7 +25,7 @@ public class Train {
         this.destination = destination;
     }
 
-    public int getTrainNumber() {
+    int getTrainNumber() {
         return trainNumber;
     }
 
@@ -32,7 +33,7 @@ public class Train {
         this.trainNumber = trainNumber;
     }
 
-    public String getDepartureTime() {
+    String getDepartureTime() {
         return departureTime;
     }
 

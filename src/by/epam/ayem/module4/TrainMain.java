@@ -1,3 +1,4 @@
+package by.epam.ayem.module4;
 /*4. Создайте класс task4train, содержащий поля: название пункта назначения, номер поезда, время отправления.
 Создайте данные в массиве из пяти элементов типа task4train, добавьте возможность сортировки элементов массива
 по номерам поездов. Добавьте возможность вывода информации о поезде, номер которого введен пользователем.
@@ -33,7 +34,7 @@ public class TrainMain {
 
     }
 
-    public static void printTrainInfo(Train[] trains) {
+    private static void printTrainInfo(Train[] trains) {
 
         Scanner sc = new Scanner(System.in);
 

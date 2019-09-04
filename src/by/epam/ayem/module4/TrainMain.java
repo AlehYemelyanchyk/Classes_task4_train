@@ -10,29 +10,30 @@ import java.util.Scanner;
 
 public class TrainMain {
 
+    private Train[] trains = new Train[5];
+
     public void run() {
 
-        Train[] trains = new Train[5];
         trains[0] = new Train("Berlin", 22786, "10:30");
         trains[1] = new Train("Warsaw", 77886, "06:54");
         trains[2] = new Train("Berlin", 33861, "08:05");
         trains[3] = new Train("Minsk", 33754, "11:30");
         trains[4] = new Train("Berlin", 45268, "12:00");
 
-        printTrains(trains);
-        sortByTrainNumber(trains);
+        printTrains();
+        sortByTrainNumber();
         System.out.println("=======================================");
         System.out.println("Sorted by numbers:");
-        printTrains(trains);
-        sortByDestination(trains);
+        printTrains();
+        sortByDestination();
         System.out.println("=======================================");
         System.out.println("Sorted alphabetically by destination:");
-        printTrains(trains);
+        printTrains();
 
-        printTrainInfo(trains);
+        printTrainInfo();
     }
 
-    private void printTrainInfo(Train[] trains) {
+    private void printTrainInfo() {
 
         Scanner sc = new Scanner(System.in);
 
@@ -51,13 +52,11 @@ public class TrainMain {
                 printTrains(train);
                 return;
             }
-
         }
-
         System.out.println("The train has not found.");
     }
 
-    private void sortByDestination(Train[] trains) {
+    private void sortByDestination() {
 
         boolean quit = false;
 
@@ -67,13 +66,11 @@ public class TrainMain {
 
             for (int i = 1; i < trains.length; i++) {
                 if (trains[i].getDestination().compareTo(trains[i - 1].getDestination()) < 0) {
-                    Train temp = trains[i];
-                    trains[i] = trains[i - 1];
-                    trains[i - 1] = temp;
+                    swap(i);
 
                     quit = false;
                 } else if (trains[i].getDestination().compareTo(trains[i - 1].getDestination()) == 0) {
-                    if (sortByDepartureTime(trains, i)) {
+                    if (sortByDepartureTime(i)) {
                         quit = false;
                     }
                 }
@@ -81,16 +78,14 @@ public class TrainMain {
         }
     }
 
-    private boolean sortByDepartureTime(Train[] trains, int i) {
+    private boolean sortByDepartureTime(int i) {
 
         String[] time1 = trains[i].getDepartureTime().split(":");
         String[] time2 = trains[i - 1].getDepartureTime().split(":");
 
-        for (int j = 0; j < time1.length; j++) {
+        for (int j = 0; j < trains.length; j++) {
             if (Integer.parseInt(time1[j]) < Integer.parseInt(time2[j])) {
-                Train temp = trains[i];
-                trains[i] = trains[i - 1];
-                trains[i - 1] = temp;
+                swap(i);
 
                 return true;
             } else if (Integer.parseInt(time1[j]) > Integer.parseInt(time2[j])) {
@@ -100,7 +95,7 @@ public class TrainMain {
         return false;
     }
 
-    private void sortByTrainNumber(Train[] trains) {
+    private void sortByTrainNumber() {
 
         boolean quit = false;
 
@@ -110,14 +105,18 @@ public class TrainMain {
 
             for (int i = 1; i < trains.length; i++) {
                 if (trains[i].getTrainNumber() < trains[i - 1].getTrainNumber()) {
-                    Train temp = trains[i];
-                    trains[i] = trains[i - 1];
-                    trains[i - 1] = temp;
+                    swap(i);
 
                     quit = false;
                 }
             }
         }
+    }
+
+    private void swap(int i) {
+        Train temp = trains[i];
+        trains[i] = trains[i - 1];
+        trains[i - 1] = temp;
     }
 
     private void printTrains(Train train) {
@@ -126,7 +125,7 @@ public class TrainMain {
                 train.getDestination() + " departs at " + train.getDepartureTime());
     }
 
-    private void printTrains(Train[] trains) {
+    private void printTrains() {
 
         for (Train train : trains) {
             System.out.println("Train #" + train.getTrainNumber() + " to " +
